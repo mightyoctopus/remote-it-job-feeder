@@ -21,7 +21,7 @@
 
     <main>
         <div class="container" id="post-container">
-            <h2>Today's Remote Jobs in IT:</h2>
+            <h2>Latest Remote Jobs in IT:</h2>
 
             <% for (let i = 0; i < locals.content.length; i++) { %>
             <article class="post-grid-container">
@@ -53,10 +53,26 @@
     <!-- Pagination buttons -->
     <div class="pagination">
         <!-- Numbered pagination -->
-        <% const totalPage = paginatedResult.pageCount; %>
-        <% for(let i = 1; i <= totalPage; i++) { %>
-            <a href="?page=<%= i %>"><%= i %></a>
-            <% } %>    
+        <% 
+        const totalPage = paginatedResult.pageCount;
+        const currentPage = paginatedResult.currentPage;
+        const pagesPerRange = 10;
+        const currentRange = Math.ceil(currentPage / pagesPerRange);
+        const startPage = (currentRange - 1) * pagesPerRange + 1;
+        const endPage = Math.min(currentRange * pagesPerRange, totalPage);
+        %>
+
+        <% if (startPage > 1) { %>
+            <a href="?page=<%= startPage - 1 %>">Prev</a>
+        <% } %>
+
+        <% for(let i = startPage; i <= endPage; i++) { %>
+            <a href="?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+
+        <% if (endPage < totalPage) { %>
+            <a href="?page=<%= endPage + 1 %>">Next</a>
+        <% } %>
     </div>
 
 

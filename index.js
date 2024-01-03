@@ -28,7 +28,7 @@ app.get('/', async (req, res) => {
                 remoteJobs.push(remote);
             }
         });
-        console.log(remoteJobs);
+        // console.log(remoteJobs);
 
         //Pagination with paginate-info middleware
         const page = req.query.page || 1;
@@ -41,7 +41,7 @@ app.get('/', async (req, res) => {
 
 
         //Convert the ISO8610 date format into the standard US timestamp
-        // The first attempt to change it from the client side failed due to a format conflict!
+        // The first attempt to change it from the client side failed due to a conflict on the data format!
         remoteJobs.map(job => {
             const date = new Date(job.activeFrom);
             const options = {
