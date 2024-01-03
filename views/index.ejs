@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REMOTE-DEV DAILY</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1 class="logo"><a>REMOTE-DEV <span class="logo-span">DAILY</span></a></h1>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container" id="post-container">
+            <h2>Today's Remote Jobs in IT:</h2>
+
+            <% for (let i = 0; i < locals.content.length; i++) { %>
+            <article class="post-grid-container">
+                    <h3><%= locals.content[i].name %></h3>
+                    <div class="post-section">
+                        <p>Company: <%= locals.content[i].company %></p>
+                        <p>Experience Level: <%= locals.content[i].expLevel %></p>
+                    </div>
+
+                    <div class="post-section">
+                        <p>Remote Work: Supported</p>
+                        <p>City: <%= locals.content[i].actualCity %></p>
+                    </div>
+
+                    <div class="post-section">
+                        <p>Address: <%= locals.content[i].address %></p>
+                    </div>
+
+                    <div class="post-section">
+                        <span class="active-since">Posted On: <%= locals.content[i].formattedDate %></span>
+                    </div>
+                
+                    <button><a href="<%= locals.content[i].redirectJobUrl %>">Details & Apply</a></button>     
+            </article>
+            <% } %>
+        </div>
+    </main>
+
+    <!-- Pagination buttons -->
+    <div class="pagination">
+        <!-- Previous page -->
+        <% if (paginatedResult.currentPage - 1) { %>
+            <a href="?page=<%= paginatedResult.currentPage - 1 %>">Prev</a>
+        <% } %>
+
+    
+
+        <% if (paginatedResult.currentPage < paginatedResult.pageCount) { %>
+            <a href="?page=<%= paginatedResult.currentPage + 1 %>">Next</a>
+        <% } %>           
+    </div>
+
+
+
+    <footer class="container">
+        <div>
+            <p class="copyright">&copy: Remote Daily. All rights reserved. <span id="currentYear"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        const currentYear = new Date().getFullYear();
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+            
+                console.log('Before fetch');
+                const response = await fetch(`/${ currentPage }`);
+                console.log('After fetch');
+                const data = await response.json();
+
+                const postContainer = document.querySelector('#post-container');
+
+                data.forEach(jobPost => {
+                    const article = document.createElement('article');
+
+                    article.innerHTML = `
+                    <h3>${jobPost.name}</h3>
+                    <div class="post-section">
+                        <p>Company: ${jobPost.company}</p>
+                        <p>Experience Level: ${jobPost.expLevel}</p>
+                    </div>
+
+                    <div class="post-section">
+                        <p>Remote Work: Supported</p>
+                        <p>City: ${ jobPost.actualCity}</p>
+                    </div>
+
+                    <div class="post-section">
+                        <p>Address: ${jobPost.address}</p>
+                    </div>
+
+                    <div class="post-section">
+                        <span class="active-since">Posted On: ${formattedDate}</span>
+                    </div>
+                
+                    <button><a href="${jobPost.redirectJobUrl}">Details & Apply</a></button>
+                    `;
+
+                    postContainer.appendChild(article);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        });
+         
+    </script>
+</body>
+
+</html>

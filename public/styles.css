@@ -1,0 +1,183 @@
+:root {
+  --primary-color: #162F5B;
+  --secondary-color: #FFFFFF;
+  --highlight-color: #FAC507;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*, 
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Mukta','Nunito Sans', sans-serif;
+  background-color: var(--primary-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+h2 {
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--secondary-color);
+  margin: 1.6rem 0; 
+  text-align: center;
+}
+
+h3 {
+  font-weight: 800;
+}
+
+p {
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+a {
+  text-decoration: none;
+  margin: 1.6rem 0;
+  color: gray;
+  font-weight: bold;
+}
+
+.container {
+  width: 65%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 760px) {
+  main .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+
+
+hr {
+  margin: 16px 0;
+}
+
+/* Navigation  */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* border: 1px solid red; */
+}
+
+.logo {
+  font-size: 1.7rem;
+  padding: 10px;
+  padding-left: 25px;
+  color: var(--secondary-color);
+}
+
+.logo-span {
+  color: var(--highlight-color);
+}
+
+
+/* Job Posts */
+
+.post-grid-container {
+  display: flex;
+  flex-direction: column; 
+  background-color: var(--secondary-color);
+  max-height: 500px;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px 3px rgba(0,0,0,0.2);
+  /* border: 1px solid red; */
+}
+
+.post-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.post-section p:not(:last-child) {
+  margin-right: 15px;
+}
+
+.post-section span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 10px;
+  width: 140px;
+  height: 30px;
+  background-color: var(--highlight-color);
+  border: none;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 760px) {
+  button {
+  margin-top: 10px;
+  width: 140px;
+  height: 30px;
+  background-color: var(--highlight-color);
+  border: none;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 13px;
+  }
+}
+
+button a {
+  color: black;
+}
+
+
+/* Footer */
+
+footer {
+  text-align: center;
+}
+
+.copyright {
+  color: var(--secondary-color);
+}
+
+
+
+/* Pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  padding: 5px 10px;
+  margin: 0 5px;
+  text-decoration: none;
+  font-weight: 300;
+  border: 1px solid #ccc;
+  color: var(--secondary-color);
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
