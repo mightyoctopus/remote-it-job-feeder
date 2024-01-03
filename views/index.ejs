@@ -52,16 +52,11 @@
 
     <!-- Pagination buttons -->
     <div class="pagination">
-        <!-- Previous page -->
-        <% if (paginatedResult.currentPage - 1) { %>
-            <a href="?page=<%= paginatedResult.currentPage - 1 %>">Prev</a>
-        <% } %>
-
-    
-
-        <% if (paginatedResult.currentPage < paginatedResult.pageCount) { %>
-            <a href="?page=<%= paginatedResult.currentPage + 1 %>">Next</a>
-        <% } %>           
+        <!-- Numbered pagination -->
+        <% const totalPage = paginatedResult.pageCount; %>
+        <% for(let i = 1; i <= totalPage; i++) { %>
+            <a href="?page=<%= i %>"><%= i %></a>
+            <% } %>    
     </div>
 
 
