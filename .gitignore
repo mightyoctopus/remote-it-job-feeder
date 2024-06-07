@@ -6,6 +6,9 @@
 # Ignore dev-log.txt
 dev-log.txt
 
+# zip compressed file
+remote-job-feeder.zip
+
 # Logs
 logs
 *.log
