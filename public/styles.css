@@ -155,6 +155,7 @@ footer {
 
 .copyright {
   color: var(--secondary-color);
+  margin: 15px 0;
 }
 
 

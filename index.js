@@ -8,16 +8,17 @@ const { calculateLimitAndOffset, paginate } = require('paginate-info');
 const app = express();
 const port = 3000;
 
-
-app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); 
 
+const basePath = '/remote-job-feeder';
+app.use(basePath, express.static(path.join(__dirname, 'public')));
 
+//Public API
 const baseUrl = 'https://devitjobs.com/api/jobsLight';
 
-app.get('/', async (req, res) => {
+app.get(`${basePath}/`, async (req, res) => {
     try {
         const response = await axios.get(baseUrl);
         const result = response.data;
@@ -32,7 +33,7 @@ app.get('/', async (req, res) => {
 
         //Pagination with paginate-info middleware
         const page = req.query.page || 1;
-        const limit = req.query.limit || 20;
+        const limit = req.query.limit || 10;
         
         const { limit: calcLimit, offset } = calculateLimitAndOffset(page, limit);
         const paginatedData = remoteJobs.slice(offset, offset + calcLimit);
@@ -54,7 +55,7 @@ app.get('/', async (req, res) => {
             return job;
         });
 
-        res.render('index', { content: paginatedData, paginatedResult });
+        res.render('index', { content: paginatedData, paginatedResult, basePath });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error'});
